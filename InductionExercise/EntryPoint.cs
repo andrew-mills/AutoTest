@@ -228,7 +228,7 @@ namespace InductionExercise
                                 Log.Info(@"Expected Result:   " + testStepPropertyStore.GetProperty("result"));
                                 test.CloseBrowser(testStepPropertyStore);
                                 break;
-                            case "Navigate_To_Login_Page":
+                            case "Navigate_To_Vehicle_Page":
                                 Log.Info(@"[" + testStepPropertyStore.GetProperty("id") + "-" + testStepPropertyStore.GetProperty("step") + "] ----------------------------------------");
                                 Log.Debug(@"Working Directory: " + testStepPropertyStore.GetProperty("workingDirectory"));
                                 Log.Debug(@"Property File:     " + testStepPropertyStore.GetProperty("propertyFile"));
