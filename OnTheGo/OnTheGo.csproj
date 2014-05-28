@@ -96,6 +96,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Framework\Framework.csproj">
+      <Project>{88dab8a9-3608-4b1a-999a-ce8a66aa94a0}</Project>
+      <Name>Framework</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Kajabity\Kajabity.csproj">
       <Project>{15f2e1e6-d8b9-4af1-85bb-7d28bd88b9bd}</Project>
       <Name>Kajabity</Name>
