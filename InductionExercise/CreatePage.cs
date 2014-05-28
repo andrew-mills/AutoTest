@@ -7,7 +7,7 @@ using Kajabity.Tools.Java;
 namespace InductionExercise
 {
 
-    public class VehiclePage : LoadableComponent<VehiclePage>
+    public class CreatePage : LoadableComponent<CreatePage>
     {
 
         private readonly IWebDriver _driver;
@@ -15,31 +15,46 @@ namespace InductionExercise
 
         private readonly string _url;
 
-        [FindsBy(How = How.CssSelector, Using = "a[href*='Create'")]
-        private IWebElement hrefCreate;
+        [FindsBy(How = How.Id, Using = "RegistrationPlate")]
+        private IWebElement inputRegistrationPlate;
 
-        [FindsBy(How = How.CssSelector, Using = "a[href*='Edit'")]
-        private IWebElement hrefEdit;
+        [FindsBy(How = How.Id, Using = "Make")]
+        private IWebElement inputMake;
 
-        [FindsBy(How = How.CssSelector, Using = "a[href*='Details'")]
-        private IWebElement hrefDetails;
+        [FindsBy(How = How.Id, Using = "TheModel")]
+        private IWebElement inputTheModel;
 
-        [FindsBy(How = How.CssSelector, Using = "a[href*='Delete'")]
-        private IWebElement hrefDelete;
+        [FindsBy(How = How.Id, Using = "Year")]
+        private IWebElement inputYear;
 
-        public VehiclePage(IWebDriver d)
+        [FindsBy(How = How.Id, Using = "Colour")]
+        private IWebElement inputColour;
+
+        [FindsBy(How = How.Id, Using = "PurchaseDate")]
+        private IWebElement inputPurchaseDate;
+
+        [FindsBy(How = How.Id, Using = "PurchasePrice")]
+        private IWebElement inputPurchasePrice;
+
+        [FindsBy(How = How.Id, Using = "btnCreate")]
+        private IWebElement btnCreate;
+
+        [FindsBy(How = How.CssSelector, Using = "a[href*='/'")]
+        private IWebElement hrefVehicle;
+
+        public CreatePage(IWebDriver d)
         {
             _driver = d;
             PageFactory.InitElements(_driver, this);
-            _url = @"" + EntryPoint.Properties.GetProperty("baseURL") + "/";
+            _url = @"" + EntryPoint.Properties.GetProperty("baseURL") + "/Vehicle/Create";
         }
 
-        public VehiclePage(IWebDriver d, JavaProperties jp)
+        public CreatePage(IWebDriver d, JavaProperties jp)
         {
             _driver = d;
             _javaProperties = jp;
             PageFactory.InitElements(_driver, this);
-            _url = @"" + _javaProperties.GetProperty("baseURL") + "/";
+            _url = @"" + _javaProperties.GetProperty("baseURL") + "/Vehicle/Create";
         }
 
         public IWebDriver GetDriver()
@@ -66,7 +81,7 @@ namespace InductionExercise
                                                                                                      .Equals("complete"));
             if ((_driver.Url.Equals(_url) == false))
             {
-                UnableToLoadMessage = "Not on the Vehicle page.";
+                UnableToLoadMessage = "Not on the Vehicle Create page.";
                 return false;
             }
 
@@ -75,28 +90,16 @@ namespace InductionExercise
             return true;
         }
 
-        public CreatePage CreateNew()
+        public VehiclePage BackToList()
         {
-            hrefCreate.Click();
-            return new CreatePage(_driver, _javaProperties);
-        }
-
-        public VehiclePage Delete()
-        {
-            hrefDelete.Click();
+            hrefVehicle.Click();
             return new VehiclePage(_driver, _javaProperties);
         }
 
-        public DetailsPage Details()
+        public VehiclePage Create()
         {
-            hrefDetails.Click();
-            return new DetailsPage(_driver, _javaProperties);
-        }
-
-        public EditPage Edit()
-        {
-            hrefEdit.Click();
-            return new EditPage(_driver, _javaProperties);
+            btnCreate.Click();
+            return new VehiclePage(_driver, _javaProperties);
         }
 
     }

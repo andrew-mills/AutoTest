@@ -59,6 +59,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DetailsPage.cs" />
+    <Compile Include="EditPage.cs" />
+    <Compile Include="CreatePage.cs" />
     <Compile Include="EntryPoint.cs" />
     <Compile Include="VehiclePage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

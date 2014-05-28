@@ -7,7 +7,7 @@ using Kajabity.Tools.Java;
 namespace InductionExercise
 {
 
-    public class VehiclePage : LoadableComponent<VehiclePage>
+    public class DetailsPage : LoadableComponent<DetailsPage>
     {
 
         private readonly IWebDriver _driver;
@@ -15,31 +15,28 @@ namespace InductionExercise
 
         private readonly string _url;
 
-        [FindsBy(How = How.CssSelector, Using = "a[href*='Create'")]
-        private IWebElement hrefCreate;
+        [FindsBy(How = How.Id, Using = "VehicleId")]
+        private IWebElement inputVehicleId;
 
-        [FindsBy(How = How.CssSelector, Using = "a[href*='Edit'")]
+        [FindsBy(How = How.CssSelector, Using = "a[href*='/Vehicle/Edit/'")]
         private IWebElement hrefEdit;
 
-        [FindsBy(How = How.CssSelector, Using = "a[href*='Details'")]
-        private IWebElement hrefDetails;
+        [FindsBy(How = How.CssSelector, Using = "a[href*='/'")]
+        private IWebElement hrefVehicle;
 
-        [FindsBy(How = How.CssSelector, Using = "a[href*='Delete'")]
-        private IWebElement hrefDelete;
-
-        public VehiclePage(IWebDriver d)
+        public DetailsPage(IWebDriver d)
         {
             _driver = d;
             PageFactory.InitElements(_driver, this);
-            _url = @"" + EntryPoint.Properties.GetProperty("baseURL") + "/";
+            _url = @"" + EntryPoint.Properties.GetProperty("baseURL") + "/Vehicle/Details/";
         }
 
-        public VehiclePage(IWebDriver d, JavaProperties jp)
+        public DetailsPage(IWebDriver d, JavaProperties jp)
         {
             _driver = d;
             _javaProperties = jp;
             PageFactory.InitElements(_driver, this);
-            _url = @"" + _javaProperties.GetProperty("baseURL") + "/";
+            _url = @"" + _javaProperties.GetProperty("baseURL") + "/Vehicle/Details/";
         }
 
         public IWebDriver GetDriver()
@@ -64,9 +61,9 @@ namespace InductionExercise
             var wait = new WebDriverWait(_driver, TimeSpan.FromSeconds(30));
             wait.Until((d) => (((IJavaScriptExecutor) d).ExecuteScript("return document.readyState")).ToString()
                                                                                                      .Equals("complete"));
-            if ((_driver.Url.Equals(_url) == false))
+            if ((_driver.Url.StartsWith(_url) == false))
             {
-                UnableToLoadMessage = "Not on the Vehicle page.";
+                UnableToLoadMessage = "Not on the Vehicle Details page.";
                 return false;
             }
 
@@ -75,22 +72,10 @@ namespace InductionExercise
             return true;
         }
 
-        public CreatePage CreateNew()
+        public VehiclePage BackToList()
         {
-            hrefCreate.Click();
-            return new CreatePage(_driver, _javaProperties);
-        }
-
-        public VehiclePage Delete()
-        {
-            hrefDelete.Click();
+            hrefVehicle.Click();
             return new VehiclePage(_driver, _javaProperties);
-        }
-
-        public DetailsPage Details()
-        {
-            hrefDetails.Click();
-            return new DetailsPage(_driver, _javaProperties);
         }
 
         public EditPage Edit()
