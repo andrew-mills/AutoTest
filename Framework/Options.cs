@@ -19,7 +19,7 @@ namespace MYOB.AutoTest
         [Option('v', "verbose", DefaultValue = false, HelpText = "Output extra detail during execution.")]
         public bool Verbose { get; set; }
 
-        [Option('w', "working", DefaultValue = ".", HelpText = "The directory where the test CSV files are located. Include the trailing slash.")]
+        [Option('w', "working", DefaultValue = ".\\", HelpText = "The directory where the test CSV files are located. Include the trailing slash.")]
         public string WorkingDirectory { get; set; }
 
         [ParserState]

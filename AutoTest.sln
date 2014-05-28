@@ -11,6 +11,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OnTheGo", "OnTheGo\OnTheGo.
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{C33FE5B1-3C1A-4ECD-AB47-BD3837132A18}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InductionExercise", "InductionExercise\InductionExercise.csproj", "{DECBF7B2-AEBE-4127-B7B6-EA5FCDCB9279}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{D9A660A3-3646-476C-91C1-9C2F67E5D507}"
 	ProjectSection(SolutionItems) = preProject
 		.nuget\NuGet.Config = .nuget\NuGet.Config
 		.nuget\NuGet.exe = .nuget\NuGet.exe
@@ -45,6 +48,12 @@ Global
 		{0F22C0CF-0CDB-435C-9090-86CC9AAF2D5E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0F22C0CF-0CDB-435C-9090-86CC9AAF2D5E}.Release|Any CPU.Build.0 = Release|Any CPU
 		{0F22C0CF-0CDB-435C-9090-86CC9AAF2D5E}.Release|x86.ActiveCfg = Release|Any CPU
+		{DECBF7B2-AEBE-4127-B7B6-EA5FCDCB9279}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DECBF7B2-AEBE-4127-B7B6-EA5FCDCB9279}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DECBF7B2-AEBE-4127-B7B6-EA5FCDCB9279}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{DECBF7B2-AEBE-4127-B7B6-EA5FCDCB9279}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DECBF7B2-AEBE-4127-B7B6-EA5FCDCB9279}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DECBF7B2-AEBE-4127-B7B6-EA5FCDCB9279}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
