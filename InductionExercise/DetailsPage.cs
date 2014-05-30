@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
 using OpenQA.Selenium.Support.PageObjects;
@@ -72,15 +74,17 @@ namespace InductionExercise
             return true;
         }
 
-        public VehiclePage BackToList()
+        public VehiclePage BackToList(JavaProperties jp)
         {
-            hrefVehicle.Click();
-            return new VehiclePage(_driver, _javaProperties);
+            IWebElement field = _driver.FindElement(By.LinkText("Back to List"));
+            field.Click();
+            return new VehiclePage(_driver, jp);
         }
 
-        public EditPage Edit()
+        public EditPage Edit(JavaProperties jp)
         {
-            hrefEdit.Click();
+            IWebElement field = _driver.FindElement(By.LinkText("Edit"));
+            field.Click();
             return new EditPage(_driver, _javaProperties);
         }
 

@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
 using OpenQA.Selenium.Support.PageObjects;
@@ -17,15 +19,6 @@ namespace InductionExercise
 
         [FindsBy(How = How.CssSelector, Using = "a[href*='Create'")]
         private IWebElement hrefCreate;
-
-        [FindsBy(How = How.CssSelector, Using = "a[href*='Edit'")]
-        private IWebElement hrefEdit;
-
-        [FindsBy(How = How.CssSelector, Using = "a[href*='Details'")]
-        private IWebElement hrefDetails;
-
-        [FindsBy(How = How.CssSelector, Using = "a[href*='Delete'")]
-        private IWebElement hrefDelete;
 
         public VehiclePage(IWebDriver d)
         {
@@ -75,28 +68,79 @@ namespace InductionExercise
             return true;
         }
 
-        public CreatePage CreateNew()
+        public CreatePage CreateNew(JavaProperties jp)
         {
             hrefCreate.Click();
-            return new CreatePage(_driver, _javaProperties);
+            return new CreatePage(_driver, jp);
         }
 
-        public VehiclePage Delete()
+        public VehiclePage Delete(JavaProperties jp)
         {
-            hrefDelete.Click();
-            return new VehiclePage(_driver, _javaProperties);
+            List<IWebElement> fields = _driver.FindElements(By.PartialLinkText("Delete")).ToList();
+            var href = jp.GetProperty("baseURL") + "/Vehicle/Delete/" + jp.GetProperty("VehicleId");
+            foreach (IWebElement field in fields)
+            {
+                if (field.GetAttribute("href").Equals(href) != true) continue;
+                field.Click();
+                break;
+            }
+            return new VehiclePage(_driver, jp);
         }
 
-        public DetailsPage Details()
+        public VehiclePage Delete_Last(JavaProperties jp, bool confirm)
         {
-            hrefDetails.Click();
-            return new DetailsPage(_driver, _javaProperties);
+            var field = _driver.FindElements(By.PartialLinkText("Delete")).ToList().Last();
+            field.Click();
+            IAlert alert = _driver.SwitchTo().Alert();
+            if (confirm)
+            {
+                alert.Accept();
+                return new VehiclePage(_driver, jp);
+            }
+            else
+            {
+                alert.Dismiss();
+                return this;
+            }
         }
 
-        public EditPage Edit()
+        public DetailsPage Details(JavaProperties jp)
         {
-            hrefEdit.Click();
-            return new EditPage(_driver, _javaProperties);
+            List<IWebElement> fields = _driver.FindElements(By.PartialLinkText("Details")).ToList();
+            var href = jp.GetProperty("baseURL") + "/Vehicle/Details/" + jp.GetProperty("VehicleId");
+            foreach (IWebElement field in fields)
+            {
+                if (field.GetAttribute("href").Equals(href) != true) continue;
+                field.Click();
+                break;
+            }
+            return new DetailsPage(_driver, jp);
+        }
+
+        public DetailsPage Details_Last(JavaProperties jp)
+        {
+            var field = _driver.FindElements(By.PartialLinkText("Details")).ToList().Last();
+            field.Click();
+            return new DetailsPage(_driver, jp);
+        }
+
+        public EditPage Edit(JavaProperties jp)
+        {
+            List<IWebElement> fields = _driver.FindElements(By.LinkText("Edit")).ToList();
+            var href = jp.GetProperty("baseURL") + "/Vehicle/Edit/" + jp.GetProperty("VehicleId");
+            foreach (IWebElement field in fields.Where(field => field.GetAttribute("href").Equals(href) == true))
+            {
+                field.Click();
+                break;
+            }
+            return new EditPage(_driver, jp);
+        }
+
+        public EditPage Edit_Last(JavaProperties jp)
+        {
+            var field = _driver.FindElements(By.PartialLinkText("Edit")).ToList().Last();
+            field.Click();
+            return new EditPage(_driver, jp);
         }
 
     }

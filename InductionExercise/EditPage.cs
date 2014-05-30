@@ -93,14 +93,29 @@ namespace InductionExercise
             return true;
         }
 
-        public VehiclePage BackToList()
+        public VehiclePage BackToList(JavaProperties jp)
         {
-            hrefVehicle.Click();
-            return new VehiclePage(_driver, _javaProperties);
+            IWebElement field = _driver.FindElement(By.LinkText("Back to List"));
+            field.Click();
+            return new VehiclePage(_driver, jp);
         }
 
-        public VehiclePage Save()
+        public VehiclePage Save(JavaProperties jp)
         {
+            inputRegistrationPlate.Clear();
+            inputRegistrationPlate.SendKeys(jp.GetProperty("RegistrationPlate"));
+            inputMake.Clear();
+            inputMake.SendKeys(jp.GetProperty("Make"));
+            inputTheModel.Clear();
+            inputTheModel.SendKeys(jp.GetProperty("TheModel"));
+            inputYear.Clear();
+            inputYear.SendKeys(jp.GetProperty("Year"));
+            inputColour.Clear();
+            inputColour.SendKeys(jp.GetProperty("Colour"));
+            inputPurchaseDate.Clear();
+            inputPurchaseDate.SendKeys(jp.GetProperty("PurchaseDate"));
+            inputPurchasePrice.Clear();
+            inputPurchasePrice.SendKeys(jp.GetProperty("PurchasePrice"));
             btnSave.Click();
             return new VehiclePage(_driver, _javaProperties);
         }

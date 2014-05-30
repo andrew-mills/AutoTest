@@ -96,10 +96,24 @@ namespace InductionExercise
             return new VehiclePage(_driver, _javaProperties);
         }
 
-        public VehiclePage Create()
+        public VehiclePage Create(JavaProperties jp)
         {
+            inputRegistrationPlate.Clear();
+            inputRegistrationPlate.SendKeys(jp.GetProperty("RegistrationPlate"));
+            inputMake.Clear();
+            inputMake.SendKeys(jp.GetProperty("Make"));
+            inputTheModel.Clear();
+            inputTheModel.SendKeys(jp.GetProperty("TheModel"));
+            inputYear.Clear();
+            inputYear.SendKeys(jp.GetProperty("Year"));
+            inputColour.Clear();
+            inputColour.SendKeys(jp.GetProperty("Colour"));
+            inputPurchaseDate.Clear();
+            inputPurchaseDate.SendKeys(jp.GetProperty("PurchaseDate"));
+            inputPurchasePrice.Clear();
+            inputPurchasePrice.SendKeys(jp.GetProperty("PurchasePrice"));
             btnCreate.Click();
-            return new VehiclePage(_driver, _javaProperties);
+            return new VehiclePage(_driver, jp);
         }
 
     }

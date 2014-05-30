@@ -28,6 +28,18 @@ namespace InductionExercise
 
         private static TestSuite _testSuite;
 
+        private static void KeywordLogging(JavaProperties testStepPropertyStore)
+        {
+            Log.Info(@"[" + testStepPropertyStore.GetProperty("id") + "-" + testStepPropertyStore.GetProperty("step") + "] ----------------------------------------");
+            Log.Debug(@"Working Directory: " + testStepPropertyStore.GetProperty("workingDirectory"));
+            Log.Debug(@"Property File:     " + testStepPropertyStore.GetProperty("propertyFile"));
+            Log.Debug(@"Test File:         " + testStepPropertyStore.GetProperty("testFile"));
+            Log.Debug(@"Browser:           " + testStepPropertyStore.GetProperty("browser"));
+            Log.Debug(@"Base URL:          " + testStepPropertyStore.GetProperty("baseURL"));
+            Log.Info(@"Function:          " + testStepPropertyStore.GetProperty("function"));
+            Log.Info(@"Expected Result:   " + testStepPropertyStore.GetProperty("result"));
+        }
+
         private static int Main(string[] args)
         {
 
@@ -134,8 +146,8 @@ namespace InductionExercise
             Console.WriteLine(@"Base URL:          {0}", Properties.GetProperty("baseURL"));
             Console.WriteLine(@"Browser:           {0}", Properties.GetProperty("browser"));
 
-            Console.WriteLine("Press <Enter> to continue...");
-            Console.ReadLine();
+            //Console.WriteLine("Press <Enter> to continue...");
+            //Console.ReadLine();
 
             var fi = new FileInfo(Properties.GetProperty("workingDirectory") + Properties.GetProperty("logConfigFile"));
 
@@ -217,41 +229,115 @@ namespace InductionExercise
                                 break;
                             case "":
                                 break;
-                            case "Close_Browser":
-                                Log.Info(@"[" + testStepPropertyStore.GetProperty("id") + "-" + testStepPropertyStore.GetProperty("step") + "] ----------------------------------------");
-                                Log.Debug(@"Working Directory: " + testStepPropertyStore.GetProperty("workingDirectory"));
-                                Log.Debug(@"Property File:     " + testStepPropertyStore.GetProperty("propertyFile"));
-                                Log.Debug(@"Test File:         " + testStepPropertyStore.GetProperty("testFile"));
-                                Log.Debug(@"Browser:           " + testStepPropertyStore.GetProperty("browser"));
-                                Log.Debug(@"Base URL:          " + testStepPropertyStore.GetProperty("baseURL"));
-                                Log.Info(@"Function:          " + testStepPropertyStore.GetProperty("function"));
-                                Log.Info(@"Expected Result:   " + testStepPropertyStore.GetProperty("result"));
-                                test.CloseBrowser(testStepPropertyStore);
+                            case "Pause":
+                                //Console.WriteLine("Press <Enter> to continue...");
+                                //Console.ReadLine();
                                 break;
-                            case "Navigate_To_Vehicle_Page":
-                                Log.Info(@"[" + testStepPropertyStore.GetProperty("id") + "-" + testStepPropertyStore.GetProperty("step") + "] ----------------------------------------");
-                                Log.Debug(@"Working Directory: " + testStepPropertyStore.GetProperty("workingDirectory"));
-                                Log.Debug(@"Property File:     " + testStepPropertyStore.GetProperty("propertyFile"));
-                                Log.Debug(@"Test File:         " + testStepPropertyStore.GetProperty("testFile"));
-                                Log.Debug(@"Browser:           " + testStepPropertyStore.GetProperty("browser"));
-                                Log.Debug(@"Base URL:          " + testStepPropertyStore.GetProperty("baseURL"));
-                                Log.Info(@"Function:          " + testStepPropertyStore.GetProperty("function"));
-                                Log.Info(@"Expected Result:   " + testStepPropertyStore.GetProperty("result"));
-                                test.NavigateToVehiclePage(testStepPropertyStore);
-                                break;
+
+                            //
+                            // Browser
+                            //
+
                             case "Open_Browser":
-                                Log.Info(@"[" + testStepPropertyStore.GetProperty("id") + "-" + testStepPropertyStore.GetProperty("step") + "] ----------------------------------------");
-                                Log.Debug(@"Working Directory: " + testStepPropertyStore.GetProperty("workingDirectory"));
-                                Log.Debug(@"Property File:     " + testStepPropertyStore.GetProperty("propertyFile"));
-                                Log.Debug(@"Test File:         " + testStepPropertyStore.GetProperty("testFile"));
-                                Log.Debug(@"Browser:           " + testStepPropertyStore.GetProperty("browser"));
-                                Log.Debug(@"Base URL:          " + testStepPropertyStore.GetProperty("baseURL"));
-                                Log.Info(@"Function:          " + testStepPropertyStore.GetProperty("function"));
-                                Log.Info(@"Expected Result:   " + testStepPropertyStore.GetProperty("result"));
+                                KeywordLogging(testStepPropertyStore);
                                 test.OpenBrowser(testStepPropertyStore);
                                 break;
+                            case "Close_Browser":
+                                KeywordLogging(testStepPropertyStore);
+                                test.CloseBrowser(testStepPropertyStore);
+                                break;
+                            
+                            //
+                            // Vehicle
+                            //
+
+                            case "Get_Vehicle_List":
+                                KeywordLogging(testStepPropertyStore);
+                                test.GetVehicleList(testStepPropertyStore);
+                                break;
+                            case "Create_New_Vehicle":
+                                KeywordLogging(testStepPropertyStore);
+                                test.CreateNewVehicle(testStepPropertyStore);
+                                break;
+                            case "Get_Details_For_Last_Vehicle":
+                                KeywordLogging(testStepPropertyStore);
+                                test.GetDetailsForLastVehicle(testStepPropertyStore);
+                                break;
+                            case "Get_Details_For_Specific_Vehicle":
+                                KeywordLogging(testStepPropertyStore);
+                                // TODO
+                                //test.GetDetailsForLastVehicle(testStepPropertyStore);
+                                break;
+                            case "Edit_Last_Vehicle":
+                                KeywordLogging(testStepPropertyStore);
+                                test.EditLastVehicle(testStepPropertyStore);
+                                break;
+                            case "Edit_Specific_Vehicle":
+                                KeywordLogging(testStepPropertyStore);
+                                test.EditSpecificVehicle(testStepPropertyStore);
+                                break;
+
+                            //
+                            // Create
+                            //
+
+                            case "Save_New_Vehicle":
+                                KeywordLogging(testStepPropertyStore);
+                                test.SaveNewVehicle(testStepPropertyStore);
+                                break;
+
+                            case "Cancel_New_Vehicle":
+                                KeywordLogging(testStepPropertyStore);
+                                test.CancelNewVehicle(testStepPropertyStore);
+                                break;
+
+                            //
+                            // Edit
+                            //
+
+                            case "Edit_Vehicle":
+                                KeywordLogging(testStepPropertyStore);
+                                test.EditVehicle(testStepPropertyStore);
+                                break;
+
+                            case "Cancel_Edit_Vehicle":
+                                KeywordLogging(testStepPropertyStore);
+                                test.CancelEditVehicle(testStepPropertyStore);
+                                break;
+
+                            //
+                            // Details
+                            //
+
+                            case "Return_From_Details_Page":
+                                KeywordLogging(testStepPropertyStore);
+                                test.ReturnFromDetailsPage(testStepPropertyStore);
+                                break;
+
+                            case "Edit_Vehicle_From_Details_Page":
+                                KeywordLogging(testStepPropertyStore);
+                                test.ReturnFromDetailsPage(testStepPropertyStore);
+                                break;
+
+                            //
+                            // Delete
+                            //
+
+                            case "Delete_Last_Vehicle_Cancel":
+                                KeywordLogging(testStepPropertyStore);
+                                test.DeleteLastVehicle(testStepPropertyStore, false);
+                                break;
+                            case "Delete_Last_Vehicle_Ok":
+                                KeywordLogging(testStepPropertyStore);
+                                test.DeleteLastVehicle(testStepPropertyStore, true);
+                                break;
+
                             default:
+                                Console.WriteLine(@"*** ERROR *** ========================================");
                                 Console.WriteLine(@"Invalid Function - [{0}]", testStepPropertyStore.GetProperty("function"));
+                                Console.WriteLine(@"*** ERROR *** ========================================");
+                                Console.WriteLine("Press <Enter> to continue...");
+                                Console.ReadLine();
                                 break;
                         }
                     }
@@ -263,8 +349,8 @@ namespace InductionExercise
 
             if (Log.IsInfoEnabled) Log.Info("Application End...");
 
-            Console.WriteLine("Press <Enter> to exit...");
-            Console.ReadLine();
+            //Console.WriteLine("Press <Enter> to exit...");
+            //Console.ReadLine();
 
             return 0;
         }

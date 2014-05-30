@@ -136,8 +136,8 @@ namespace MYOB.AutoTest.OnTheGo
             Console.WriteLine(@"Base URL:          {0}", Properties.GetProperty("baseURL"));
             Console.WriteLine(@"Browser:           {0}", Properties.GetProperty("browser"));
 
-            Console.WriteLine("Press <Enter> to continue...");
-            Console.ReadLine();
+            //Console.WriteLine("Press <Enter> to continue...");
+            //Console.ReadLine();
 
             var fi = new FileInfo(Properties.GetProperty("workingDirectory") + Properties.GetProperty("logConfigFile"));
 
@@ -298,8 +298,8 @@ namespace MYOB.AutoTest.OnTheGo
 
             if (Log.IsInfoEnabled) Log.Info("Application End...");
 
-            Console.WriteLine("Press <Enter> to exit...");
-            Console.ReadLine();
+            //Console.WriteLine("Press <Enter> to exit...");
+            //Console.ReadLine();
 
             return 0;
         }
